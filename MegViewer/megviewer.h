@@ -14,6 +14,7 @@ public:
 
 protected:
     void initControls();
+    void loadImg(const QString& strPath);
 
 private slots:
     void slotOnFileActTrigger();
