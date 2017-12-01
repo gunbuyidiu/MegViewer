@@ -3,6 +3,9 @@
 
 #include <QtWidgets/QMainWindow>
 #include "ui_megviewer.h"
+#include <QImage>
+
+class QLabel;
 
 class MegViewer : public QMainWindow
 {
@@ -11,16 +14,28 @@ class MegViewer : public QMainWindow
 public:
     MegViewer(QWidget *parent = 0);
     ~MegViewer();
+    bool loadImg(const QString& strPath);
 
 protected:
     void initControls();
-    void loadImg(const QString& strPath);
 
 private slots:
     void slotOnFileActTrigger();
 
 private:
     Ui::MegViewerClass ui;
+    virtual void wheelEvent(QWheelEvent *event) override;
+
+    virtual bool eventFilter(QObject *watched, QEvent *event) override;
+
+private:
+    void scale(double dScale);
+    void zoom(bool bIn);
+
+private:
+    QImage m_pImage;
+    QLabel* m_pLabel;
+    double m_dScale;
 };
 
 #endif // MEGVIEWER_H
