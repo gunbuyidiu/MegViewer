@@ -307,10 +307,6 @@ void ImageWidget::paintEvent(QPaintEvent *e)
 {
     QLabel::paintEvent(e);
 
-//     if (m_pImg.isNull())
-//     {
-//         return;
-//     }
     QPainter painter(this);
     
     drawCurve(painter);
@@ -349,27 +345,14 @@ void ImageWidget::doMouseMove(QMouseEvent * e)
 void ImageWidget::drawImage()
 {
     int nCopyX = -m_nXTranslate, nCopyY = -m_nYTranslate;
-    if (m_bMouseMidDown)
-    {
-        nCopyX -= m_nXMoveTrans;
-        nCopyY -= m_nYMoveTrans;
-    }
-
-    QImage oDrawImg = m_pImg;
-//     float fScale = m_fScalex;
-//     while (fScale > 2)
+//     if (m_bMouseMidDown)
 //     {
-//         oDrawImg = oDrawImg.scaled(this->width() * 2, this->height() * 2,
-//             Qt::KeepAspectRatio);
-//         fScale /= 2;
+//         nCopyX -= m_nXMoveTrans;
+//         nCopyY -= m_nYMoveTrans;
 //     }
-// 
-//     oDrawImg = oDrawImg.scaled(this->width() * fScale, this->height() * fScale,
-//         Qt::KeepAspectRatio);
 
-    this->setPixmap(QPixmap::fromImage(oDrawImg));
-//     this->setPixmap(QPixmap::fromImage(m_pImg.scaled(this->width()*m_fScalex, this->height()*m_fScaley,
-//         Qt::KeepAspectRatio).copy(nCopyX, nCopyY, this->width(), this->height())));
+    this->setPixmap(QPixmap::fromImage(m_pImg.scaled(this->width()*m_fScalex, this->height()*m_fScaley,
+        Qt::KeepAspectRatio).copy(nCopyX, nCopyY, this->width(), this->height())));
 }
 
 void ImageWidget::drawCurve(QPainter& oPainter)
